@@ -9,6 +9,8 @@ C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Deb
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Humanizer.dll
+C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -33,6 +35,8 @@ C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Deb
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\DerelMaswanganyi\OneDrive - Xiquel Group\Documents\FinShark\api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
