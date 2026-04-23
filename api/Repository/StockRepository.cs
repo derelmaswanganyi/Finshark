@@ -1,5 +1,6 @@
 using api.Data;
 using api.Dtos.Stock;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,9 +16,36 @@ namespace api.Repository
             _context = context;
         }
 
-        public async Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            return await _context.Stocks.Include(s => s.Comments).ToListAsync();
+            var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+
+            if (!string.IsNullOrEmpty(query.Symbol))
+            {
+                stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+            }
+
+            if (!string.IsNullOrEmpty(query.CompanyName))
+            {
+                stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+            }
+
+            if(!string.IsNullOrEmpty(query.SortBy))
+            {
+                if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+                }
+                else if (query.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
+                {
+                    stocks = query.IsDescending ? stocks.OrderByDescending(s => s.CompanyName) : stocks.OrderBy(s => s.CompanyName);
+                }
+            }
+
+            var skipnumber = (query.PageNumber - 1) * query.PageSize;
+
+
+            return await stocks.Skip(skipnumber).Take(query.PageSize).ToListAsync();
         }
         public async Task<Stock> CreateAsync(Stock stock)
         {
@@ -26,17 +54,17 @@ namespace api.Repository
             return stock;
         }
 
-        public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto dto)
+        public async Task<Stock?> UpdateAsync(int id, Stock stockModel)
         {
             var stock = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
             if (stock == null) return null;
 
-            stock.Symbol = dto.Symbol;
-            stock.CompanyName = dto.CompanyName;
-            stock.Purchase = dto.Purchase;
-            stock.LastDiv = dto.LastDiv;
-            stock.Industy = dto.Industy;
-            stock.MarketCap = dto.MarketCap;
+            stock.Symbol = stockModel.Symbol;
+            stock.CompanyName = stockModel.CompanyName;
+            stock.Purchase = stockModel.Purchase;
+            stock.LastDiv = stockModel.LastDiv;
+            stock.Industy = stockModel.Industy;
+            stock.MarketCap = stockModel.MarketCap;
 
             await _context.SaveChangesAsync();
             return stock;
@@ -62,6 +90,7 @@ namespace api.Repository
         {
             return _context.Stocks.AnyAsync(s => s.Id == id);
         }
+
 
     }
 }
