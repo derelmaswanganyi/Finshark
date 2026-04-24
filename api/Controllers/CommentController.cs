@@ -1,6 +1,9 @@
 using api.Dtos.Comment;
+using api.Extensions;
 using api.Interfaces;
 using api.Mappers;
+using api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -12,10 +15,12 @@ namespace api.Controllers
     {   
         private readonly ICommentRepository _commentRepository;
         private readonly IStockRepository _stockRepository;
-        public CommentController(ICommentRepository commentRepository, IStockRepository stockRepository)
+        private readonly UserManager<AppUser> _userManager;
+        public CommentController(ICommentRepository commentRepository, IStockRepository stockRepository, UserManager<AppUser> userManager)
         {
             _commentRepository = commentRepository;
             _stockRepository = stockRepository;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -73,7 +78,18 @@ namespace api.Controllers
             {
                 return NotFound($"Stock with id {stockId} not found.");
             }
+
+            var userName = User.GetUsername();
+            var appUser = await _userManager.FindByNameAsync(userName);
+
+            if (appUser == null)
+            {
+                return Unauthorized("User not found");
+            }
+                        
             var commentModel = commentDto.ToCommentModel(stockId);
+
+            commentModel.AppUserId = appUser.Id;
             await _commentRepository.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }
